@@ -17,17 +17,21 @@ import (
 	"github.com/blang/semver"
 )
 
+// Tag is the individual tag from gitlab, with addition of Version.
 type Tag struct {
 	Version semver.Version `json:"-"`
 	Name    string         `json:"name"`
 	Message string         `json:"message"`
 }
 
+// Tags is the array of gitlab tags.
 type Tags []Tag
 
-func (a Tags) Len() int           { return len(a) }
-func (a Tags) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
-func (a Tags) Less(i, j int) bool { return a[i].Name < a[j].Name }
+func (a Tags) Len() int      { return len(a) }
+func (a Tags) Swap(i, j int) { a[i], a[j] = a[j], a[i] }
+
+// This is a reverse sort - most recent first, hence > instead of <.
+func (a Tags) Less(i, j int) bool { return a[i].Name > a[j].Name }
 
 var (
 	baseURL    string
