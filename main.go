@@ -31,7 +31,7 @@ func (a Tags) Len() int      { return len(a) }
 func (a Tags) Swap(i, j int) { a[i], a[j] = a[j], a[i] }
 
 // This is a reverse sort - most recent first, hence > instead of <.
-func (a Tags) Less(i, j int) bool { return a[i].Name > a[j].Name }
+func (a Tags) Less(i, j int) bool { return a[i].Version.GT(a[j].Version) }
 
 var (
 	baseURL    string
